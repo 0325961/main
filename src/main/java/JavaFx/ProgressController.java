@@ -39,7 +39,8 @@ public class ProgressController extends HBox {
                 for (String date : eventsList.get(moduleCode).keySet()) {
                     for (int i = 0; i < eventsList.get(moduleCode).get(date).size(); i++) {
                         eventTask = eventsList.get(moduleCode).get(date).get(i);
-                        moduleCodeStatusIconDescriptionArrList.add(new Pair(moduleCode, new Pair(eventTask.getStatusIcon(), eventTask.getDescription())));
+
+                        moduleCodeStatusIconDescriptionArrList.add(new Pair<String, Pair<String, String>>(moduleCode, new Pair(eventTask.getStatusIcon(), eventTask.getDescription())));
                     }
                 }
             }

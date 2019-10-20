@@ -25,6 +25,8 @@ import javafx.scene.text.Text;
 import javafx.util.Duration;
 import javafx.util.Pair;
 
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URL;
 import java.text.DateFormat;
@@ -132,14 +134,13 @@ public class MainWindow extends BorderPane implements Initializable {
         fxmlLoader.load();
         Pair<HashMap<String, String>, ArrayList<Pair<String, Pair<String, String>>>> result= fxmlLoader.<ProgressController>getController().getProgressIndicatorMap(eventsList.getMap(), deadlinesList.getMap());
         number_of_modules = result.getKey().keySet().size();
-        //System.out.println("Number of times: " + (String.valueOf(number_of_modules)));
 
         HashMap<String, String> modules = result.getKey();
-        int totalNumTasks = 0;
-        int completedValue = 0;
+
         for (String module : modules.keySet()) {
             ArrayList<Pair<String, Pair<String, String>>> tasks = result.getValue();
-            //totalNumTasks = tasks.size();
+            int completedValue = 0;
+            int totalNumTasks = 0;
             for (Pair<String, Pair<String, String>> as : tasks) {
                 if (as.getKey().equals(module)) {
                     totalNumTasks += 1;
@@ -259,6 +260,7 @@ public class MainWindow extends BorderPane implements Initializable {
     private void handleUserInput() throws ParseException, IOException {
         String input = userInput.getText();
         String response = duke.getResponse(input);
+        retrieveList();
         if (input.startsWith("Week")) {
             setWeek(false, input);
             setListView();
